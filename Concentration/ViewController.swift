@@ -17,15 +17,17 @@ class ViewController: UIViewController {
             flipCountLabel.text = "Flip:\(flipCount)"
         }
     }
-
-    var emojiChoice = ["👻","🎃", "👻","🎃"]
+    var emojiChoice = ["🏳️‍🌈","🏳️‍🌈", "🇺🇸", "🇺🇸"]
+    var emojiChoices = ["Flags":["🏳️‍🌈","🏳️‍🌈", "🇺🇸", "🇺🇸", "🇯🇵", "🇯🇵","🇨🇳","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"]]
     
     @IBOutlet weak var flipCountLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func newGame(_ sender: UIButton) {
-        
+        flipCount = 0
+        game.resetGame()
+        updateViewFromModel()
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
@@ -39,6 +41,7 @@ class ViewController: UIViewController {
     }
     
     func updateViewFromModel(){
+        //from model to view, check isFaceUp or not to set the card view
         for index in cardButtons.indices{
             let button = cardButtons[index]
             let card = game.cards[index]

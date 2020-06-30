@@ -14,6 +14,14 @@ class Concentration{
     
     var indexOfOneAndOnlyFaceUpCard: Int?
     
+    init(numberOfPairsOfCards: Int) {
+        for _ in 0..<numberOfPairsOfCards{
+            let card = Card()
+            cards += [card, card]
+        }
+        cards.shuffle()
+    }
+    
     func chooseCard(at index : Int){
         if !cards[index].isMatched{
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index{
@@ -24,6 +32,7 @@ class Concentration{
                 cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = nil
             }else{
+                //flip every card to face down
                 for flipDownIndex in cards.indices{
                     cards[flipDownIndex].isFaceUp = false
                 }
@@ -33,11 +42,10 @@ class Concentration{
         }
     }
     
-    init(numberOfPairsOfCards: Int) {
-        for _ in 0..<numberOfPairsOfCards{
-            let card = Card()
-            cards += [card, card]
+    func resetGame(){
+        for flipDownIndex in cards.indices{
+            cards[flipDownIndex].isFaceUp = false
+            cards[flipDownIndex].isMatched = false
         }
-        cards.shuffle()
     }
 }
