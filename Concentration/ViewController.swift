@@ -17,21 +17,30 @@ class ViewController: UIViewController {
             flipCountLabel.text = "Flip:\(flipCount)"
         }
     }
-    var emojiChoice = ["🏳️‍🌈","🏳️‍🌈", "🇺🇸", "🇺🇸"]
-    var emojiChoices = ["Flags":["🏳️‍🌈","🏳️‍🌈", "🇺🇸", "🇺🇸", "🇯🇵", "🇯🇵","🇨🇳","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🏴󠁧󠁢󠁥󠁮󠁧󠁿"]]
+    
+    var score:Int = 0{
+        didSet{
+            scoreLabel.text = "Score:\(score)"
+        }
+    }
+    
+    var emojiChoice = ["🏳️‍🌈", "🇺🇸", "🇯🇵","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇨🇦","🇲🇽", "🇻🇳"]
+    var emojiChoices = ["Flags":["🏳️‍🌈", "🇺🇸", "🇯🇵","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇨🇦","🇲🇽", "🇻🇳"],
+                        "Animals":["🐶", "🐒", "🦇", "🐴", "🐬", "🐇", "🐉", "🦍"],
+                        "Faces":["😀","🤓","🤪", "🥺", "🥶", "🤭", "🤮", "👿"]]
     
     @IBOutlet weak var flipCountLabel: UILabel!
+    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func newGame(_ sender: UIButton) {
-        flipCount = 0
         game.resetGame()
         updateViewFromModel()
     }
     
     @IBAction func touchCard(_ sender: UIButton) {
-        flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -53,6 +62,8 @@ class ViewController: UIViewController {
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
             }
         }
+        flipCount = game.flipCount
+        score = game.score
     }
     
     var emoji = Dictionary<Int, String>()

@@ -190,25 +190,34 @@
                                 <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Score:0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wha-fb-rUo">
+                                <rect key="frame" x="140" y="687" width="134" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <color key="textColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ql0-FS-Sl4" firstAttribute="top" secondItem="mdA-6O-LK2" secondAttribute="bottom" constant="8" id="3XK-x1-C1H"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zcH-lb-FYs" secondAttribute="trailing" constant="20" id="75g-sB-neZ"/>
-                            <constraint firstItem="mdA-6O-LK2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="LeY-ve-mhS"/>
                             <constraint firstItem="zcH-lb-FYs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="SZg-R3-Cao"/>
                             <constraint firstItem="mdA-6O-LK2" firstAttribute="top" relation="greaterThanOrEqual" secondItem="zcH-lb-FYs" secondAttribute="bottom" constant="8" symbolic="YES" id="UDF-qB-OK8"/>
                             <constraint firstItem="zcH-lb-FYs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ZPn-wo-bu4"/>
+                            <constraint firstItem="mdA-6O-LK2" firstAttribute="top" secondItem="wha-fb-rUo" secondAttribute="bottom" constant="8" id="ad4-cn-drZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ql0-FS-Sl4" secondAttribute="bottom" id="f49-Ff-ijg"/>
+                            <constraint firstItem="wha-fb-rUo" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="fLV-EE-El0"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="zcH-lb-FYs" secondAttribute="top" id="k21-Y8-YSj"/>
                             <constraint firstItem="zcH-lb-FYs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="sfA-SR-qWt"/>
                             <constraint firstItem="Ql0-FS-Sl4" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tGK-kb-XoW"/>
+                            <constraint firstItem="mdA-6O-LK2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="tnZ-Lo-7pF"/>
                             <constraint firstItem="zcH-lb-FYs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="xIC-tn-Zb4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="flipCountLabel" destination="mdA-6O-LK2" id="S23-nS-kCt"/>
+                        <outlet property="scoreLabel" destination="wha-fb-rUo" id="68r-J0-kno"/>
                         <outletCollection property="cardButtons" destination="OEs-gP-MmQ" collectionClass="NSMutableArray" id="YMD-1b-8TL"/>
                         <outletCollection property="cardButtons" destination="w3b-AT-Knj" collectionClass="NSMutableArray" id="svm-lq-cpi"/>
                         <outletCollection property="cardButtons" destination="wQn-4y-3jc" collectionClass="NSMutableArray" id="d36-Mr-KYf"/>
