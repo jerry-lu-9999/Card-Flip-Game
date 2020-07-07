@@ -10,37 +10,54 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count+1) / 2)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+
+    var numberOfPairsOfCards: Int{
+        return (cardButtons.count+1) / 2
+    }
     
-    var flipCount:Int = 0{
+    private(set) var flipCount:Int = 0{
         didSet{ //property observer
-            flipCountLabel.text = "Flip:\(flipCount)"
+            updateFlipCountLabel()
         }
     }
     
-    var score:Int = 0{
+    private func updateFlipCountLabel(){
+        let attributes: [NSAttributedString.Key:Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flip:\(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
+    }
+    
+    private(set) var score:Int = 0{
         didSet{
             scoreLabel.text = "Score:\(score)"
         }
     }
     
-    var emojiChoice = ["🏳️‍🌈", "🇺🇸", "🇯🇵","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇨🇦","🇲🇽", "🇻🇳"]
-    var emojiChoices = ["Flags":["🏳️‍🌈", "🇺🇸", "🇯🇵","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇨🇦","🇲🇽", "🇻🇳"],
-                        "Animals":["🐶", "🐒", "🦇", "🐴", "🐬", "🐇", "🐉", "🦍"],
-                        "Faces":["😀","🤓","🤪", "🥺", "🥶", "🤭", "🤮", "👿"]]
+    var emojiChoice = "🏳️‍🌈🇺🇸🇯🇵🇨🇳🏴󠁧󠁢󠁥󠁮󠁧󠁿🇨🇦🇲🇽🇻🇳"
+//    var emojiChoices = ["Flags":["🏳️‍🌈", "🇺🇸", "🇯🇵","🇨🇳", "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "🇨🇦","🇲🇽", "🇻🇳"],
+//                        "Animals":["🐶", "🐒", "🦇", "🐴", "🐬", "🐇", "🐉", "🦍"],
+//                        "Faces":["😀","🤓","🤪", "🥺", "🥶", "🤭", "🤮", "👿"]]
     
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!{
+        didSet{
+            updateFlipCountLabel()
+        }
+    }
     
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBAction func newGame(_ sender: UIButton) {
+    @IBAction private func newGame(_ sender: UIButton) {
         game.resetGame()
         updateViewFromModel()
     }
     
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         if let cardNumber = cardButtons.firstIndex(of: sender){
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -49,7 +66,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateViewFromModel(){
+    private func updateViewFromModel(){
         //from model to view, check isFaceUp or not to set the card view
         for index in cardButtons.indices{
             let button = cardButtons[index]
@@ -66,16 +83,17 @@ class ViewController: UIViewController {
         score = game.score
     }
     
-    var emoji = Dictionary<Int, String>()
+    private var emoji = Dictionary<Card, String>()
     
-    func emoji(for card : Card) -> String{
-        if emoji[card.identifier] == nil {
+    private func emoji(for card : Card) -> String{
+        if emoji[card] == nil {
             if emojiChoice.count > 0{
-                let randomIndex = Int.random(in: 0..<emojiChoice.count)
-                emoji[card.identifier] = emojiChoice.remove(at: randomIndex)
+                let randomStringIndex = emojiChoice.index(emojiChoice.startIndex, offsetBy: Int.random(in: 0..<emojiChoice.count))
+                emoji[card] = String(emojiChoice.remove(at: randomStringIndex))
             }
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
+    
 }
 
